@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop – Alleinerziehende Eltern Salzburg 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #e8e4df;
+    font-family: 'Inter', sans-serif;
+    color: #1a1a2e;
+    padding: 32px 16px 48px;
+  }
+
+  .container { max-width: 480px; margin: 0 auto; }
+
+  .stripe { height: 6px; background: linear-gradient(90deg, #c0392b, #e74c3c, #f39c12); }
+
+  .flyer { background: #fdf8f3; border-radius: 8px 8px 0 0; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+
+  .flyer-header { background: #1a1a2e; padding: 32px 28px 24px; }
+
+  .eyebrow { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #f39c12; font-weight: 600; margin-bottom: 12px; }
+
+  .title { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900; color: #fdf8f3; line-height: 1.15; margin-bottom: 8px; }
+  .title span { color: #f39c12; }
+
+  .subtitle { font-size: 12px; color: #aaa8c4; line-height: 1.6; margin-top: 8px; }
+
+  .flyer-body { padding: 22px 28px; }
+
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #c0392b; font-weight: 600; margin-bottom: 10px; }
+
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+
+  .info-card { background: #f0ebe4; border-radius: 4px; padding: 10px 12px; border-left: 3px solid #c0392b; }
+  .info-card .label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 3px; }
+  .info-card .value { font-size: 13px; font-weight: 600; color: #1a1a2e; }
+
+  .divider { height: 1px; background: #e0d9d0; margin: 16px 0; }
+
+  .times-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .time-pill { background: #1a1a2e; color: #fdf8f3; border-radius: 20px; padding: 5px 12px; font-size: 12px; font-weight: 500; }
+
+  .description { font-size: 12.5px; color: #555; line-height: 1.65; }
+
+  /* VOTING */
+  .voting { background: #fdf8f3; padding: 24px 28px; box-shadow: 0 8px 40px rgba(0,0,0,0.12); margin-top: 2px; }
+
+  .voting-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+  .voting-sub { font-size: 12px; color: #888; margin-bottom: 18px; line-height: 1.5; }
+
+  .month-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #c0392b; font-weight: 600; margin-bottom: 8px; margin-top: 18px; }
+  .month-label:first-of-type { margin-top: 0; }
+
+  .table-wrap { overflow-x: auto; margin-bottom: 4px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  thead th { background: #1a1a2e; color: #fdf8f3; padding: 8px 6px; text-align: center; font-size: 11px; font-weight: 600; }
+  thead th:first-child { text-align: left; padding-left: 10px; }
+  tbody tr:nth-child(even) { background: #f5f0ea; }
+  tbody td { padding: 8px 6px; text-align: center; border-bottom: 1px solid #e8e2da; }
+  tbody td:first-child { text-align: left; font-weight: 600; font-size: 11px; color: #c0392b; padding-left: 10px; white-space: nowrap; }
+
+  .check-cell { cursor: pointer; user-select: none; }
+  .check-cell input[type="checkbox"] { display: none; }
+  .check-box { width: 20px; height: 20px; border: 2px solid #ccc; border-radius: 3px; margin: 0 auto; display: flex; align-items: center; justify-content: center; background: #fff; transition: all 0.15s; }
+  .check-cell input:checked + .check-box { background: #1a1a2e; border-color: #1a1a2e; }
+  .check-cell input:checked + .check-box::after { content: '✓'; color: #f39c12; font-size: 12px; font-weight: 700; }
+
+  /* SUBMIT */
+  .submit-wrap { background: #fdf8f3; border-radius: 0 0 8px 8px; padding: 20px 28px 28px; text-align: center; box-shadow: 0 8px 40px rgba(0,0,0,0.12); margin-top: 2px; }
+
+  .btn { background: #c0392b; color: #fff; border: none; border-radius: 4px; padding: 14px 36px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s; }
+  .btn:hover { background: #a93226; }
+  .hint { font-size: 11px; color: #aaa; margin-top: 8px; }
+
+  .success { display: none; background: #1a1a2e; border-radius: 8px; padding: 28px; text-align: center; color: #fdf8f3; margin-top: 16px; }
+  .success .icon { font-size: 36px; margin-bottom: 10px; }
+  .success h2 { font-family: 'Playfair Display', serif; font-size: 20px; color: #f39c12; margin-bottom: 8px; }
+  .success p { font-size: 12px; color: #aaa8c4; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="flyer">
+    <div class="stripe"></div>
+    <div class="flyer-header">
+      <div class="eyebrow">Einladung · Salzburg 2026</div>
+      <div class="title">Workshop für<br><span>alleinerziehende</span><br>Eltern</div>
+      <div class="subtitle">Ein kostenloser Workshop – speziell für euch.<br>Gemeinsam stark, Schritt für Schritt.</div>
+    </div>
+    <div class="flyer-body">
+      <div class="section-label">Wann & Wo</div>
+      <div class="info-grid">
+        <div class="info-card"><div class="label">Zeitraum</div><div class="value">April – Mai 2026</div></div>
+        <div class="info-card"><div class="label">Rhythmus</div><div class="value">1× pro Woche</div></div>
+        <div class="info-card"><div class="label">Ort</div><div class="value">Salzburg</div></div>
+        <div class="info-card"><div class="label">Kosten</div><div class="value">Kostenlos</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="section-label">Mögliche Uhrzeiten</div>
+      <div class="times-row">
+        <span class="time-pill">09:00</span>
+        <span class="time-pill">14:00</span>
+        <span class="time-pill">16:00</span>
+        <span class="time-pill">18:00</span>
+        <span class="time-pill">20:00</span>
+      </div>
+      <div class="description">Wählt euren Wunschtermin direkt unten aus – ihr entscheidet gemeinsam, wann es am besten passt.</div>
+    </div>
+  </div>
+
+  <div class="voting">
+    <div class="voting-title">Jetzt abstimmen</div>
+    <div class="voting-sub">Wählt alle Termine aus, die für euch passen. Mehrfachauswahl möglich!</div>
+
+    <div class="month-label">April 2026</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Uhrzeit</th><th>Mo</th><th>Mi</th><th>Fr</th><th>Sa</th><th>So</th></tr></thead>
+        <tbody id="april-body"></tbody>
+      </table>
+    </div>
+
+    <div class="month-label">Mai 2026</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Uhrzeit</th><th>Mo</th><th>Mi</th><th>Fr</th><th>Sa</th><th>So</th></tr></thead>
+        <tbody id="mai-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="submit-wrap">
+    <button class="btn" onclick="submitVote()">Abstimmen ✓</button>
+    <div class="hint">Ihr könnt beliebig viele Termine auswählen</div>
+  </div>
+
+  <div class="success" id="success">
+    <div class="icon">🎉</div>
+    <h2>Danke für eure Stimme!</h2>
+    <p>Wir melden uns mit dem finalen Termin.<br>Wir freuen uns auf euch in Salzburg!</p>
+  </div>
+
+</div>
+
+<script>
+  const times = ['09:00','14:00','16:00','18:00','20:00'];
+  const days = ['Mo','Mi','Fr','Sa','So'];
+
+  function buildTable(tbodyId, month) {
+    const tbody = document.getElementById(tbodyId);
+    times.forEach(time => {
+      const tr = document.createElement('tr');
+      let html = `<td>${time}</td>`;
+      days.forEach(day => {
+        const id = `${month}-${day}-${time}`;
+        html += `<td class="check-cell" onclick="toggle('${id}')"><input type="checkbox" id="${id}"><div class="check-box"></div></td>`;
+      });
+      tr.innerHTML = html;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function toggle(id) {
+    const cb = document.getElementById(id);
+    cb.checked = !cb.checked;
+  }
+
+  buildTable('april-body', 'april');
+  buildTable('mai-body', 'mai');
+
+  function submitVote() {
+    const checked = document.querySelectorAll('input[type="checkbox"]:checked');
+    if (checked.length === 0) { alert('Bitte wählt mindestens einen Termin aus!'); return; }
+    document.querySelector('.submit-wrap').style.display = 'none';
+    document.querySelector('.voting').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    document.getElementById('success').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
